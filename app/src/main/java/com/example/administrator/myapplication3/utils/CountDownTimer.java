@@ -40,6 +40,9 @@ public abstract class CountDownTimer {
     public final void cancel() {
         mHandler.removeMessages(MSG);
         mCancelled = true;
+
+
+
     }
  
     /**
