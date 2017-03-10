@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements Handler.Callback,
         }
     };
     private SensorManager sm;
+
     @Override
     public boolean handleMessage(Message msg) {
         switch (msg.what) {
@@ -108,6 +109,29 @@ public class MainActivity extends AppCompatActivity implements Handler.Callback,
         return false;
     }
     private static boolean isreverse = false;
+    /**
+     *
+     * ━━━━━━神兽保佑━━━━━━
+     * 　　　┏┓　　　┏┓
+     * 　　┏┛┻━━━┛┻┓
+     * 　　┃　　　　　　　┃
+     * 　　┃　　　━　　　┃
+     * 　　┃　┳┛　┗┳　┃
+     * 　　┃　　　　　　　┃
+     * 　　┃　　　┻　　　┃
+     * 　　┃　　　　　　　┃
+     * 　　┗━┓　　　┏━┛Code is far away from bug with the animal protecting
+     * 　　　　┃　　　┃    神兽保佑,代码无bug
+     * 　　　　┃　　　┃
+     * 　　　　┃　　　┗━━━┓
+     * 　　　　┃　　　　　　　┣┓
+     * 　　　　┃　　　　　　　┏┛
+     * 　　　　┗┓┓┏━┳┓┏┛
+     * 　　　　　┃┫┫　┃┫┫
+     * 　　　　　┗┻┛　┗┻┛
+     *
+     * ━━━━━━代码无BUG━━━━━━
+     */
     private void chagePath(Message msg) {
         if (!text_step.getText().equals(msg.getData().getInt("step") + "")) {
             drawxy drawxy1 = list.get(list.size() - 1);
@@ -134,7 +158,6 @@ public class MainActivity extends AppCompatActivity implements Handler.Callback,
                     isreverse = false;
                 }
                 if (isreverse) {
-
                     if (Math.abs(degree - startDegree) > 170) {
 
                         if (Math.abs(degree - startDegree) < 210) {
@@ -251,6 +274,7 @@ public class MainActivity extends AppCompatActivity implements Handler.Callback,
                     list.add(drawxy);
                     my_view.requestLayout();
                 }
+
                 if (degree > startDegree + 180 && degree < startDegree + 270) {
                     // TODO: 2017/2/22  第三区间 y+ x+
                     Log.i("日志输出", "第三区间");
@@ -264,6 +288,7 @@ public class MainActivity extends AppCompatActivity implements Handler.Callback,
                     list.add(drawxy);
                     my_view.requestLayout();
                 }
+
                 int oldDegree = (int) startDegree;
                 //起始角度小于九十度，那么偏转后，角度可能为负值。
                 if (startDegree < 90) {
@@ -288,12 +313,14 @@ public class MainActivity extends AppCompatActivity implements Handler.Callback,
             text_step.setText(msg.getData().getInt("step") + "");
         }
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
     }
+
     private void init() {
         WindowManager wm = (WindowManager) this
                 .getSystemService(Context.WINDOW_SERVICE);
@@ -316,16 +343,19 @@ public class MainActivity extends AppCompatActivity implements Handler.Callback,
         // 传感器管理器
         sm = (SensorManager) getSystemService(SENSOR_SERVICE);
     }
+
     @Override
     protected void onStart() {
         super.onStart();
         setupService();
     }
+
     private void setupService() {
         Intent intent = new Intent(this, StepService.class);
         startService(intent);
         bindService(intent, conn, Context.BIND_AUTO_CREATE);
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -341,16 +371,19 @@ public class MainActivity extends AppCompatActivity implements Handler.Callback,
                 sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
                 SensorManager.SENSOR_DELAY_FASTEST);
     }
+
     @Override
     public void onBackPressed() {
         moveTaskToBack(true);
         super.onBackPressed();
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         unbindService(conn);
     }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -367,7 +400,9 @@ public class MainActivity extends AppCompatActivity implements Handler.Callback,
                 break;
         }
     }
+
     public static final float STANDARD_GRAVITY = 9.80665F;
+
     @Override
     public void onSensorChanged(SensorEvent event) {
         //方向传感器变化
